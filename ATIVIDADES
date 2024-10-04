@@ -1,0 +1,49 @@
+create database func_bd;
+
+create table funcionario (
+	cod_func int auto_increment primary key not null,
+    nome_func varchar(50) not null,
+    sexo_func varchar(50),
+    bairro_func varchar(50),
+    sal_func decimal(10,2),
+    setor_func varchar(50)
+);
+
+insert into funcionario (nome_func, sexo_func, bairro_func, sal_func, setor_func)
+	values ("Larissa Menezes", "F", "Jabaquara", 1200.00, "Marketing"),
+           ("Selma Nunes", "F", "Grajaú", 3800.00, "Vendas"),
+           ("Leandro Henrique", "M", "Socorro", 2950.00, "RH"),
+           ("Amélia Jeremias", "F", "Socorro", 4200.00, "Marketing"),
+           ("Cláudio Jorge Silva", "M", "Jabaquara", 1480.00, "Vendas"),
+           ("Luciano Souza", "M", "Pedreira", 1000.00, "Vendas"),
+           ("Gabriela Santos Nunes", "F", "Jurubatuba", 4150.00, "Vendas"),
+           ("Rafaela Vieira Jr", "F", "Jabaquara", 700.00, "Marketing"),
+           ("Suzana Crispim", "F", "Grajaú", 5600.00, "Produção"),
+           ("Sabrina Oliveira Castro", "F", "Pedreira", 2900.00, "Marketing"),
+           ("Jarbas Silva Nunes", "M", "Jurubatuba", 5300.00, "Produção"),
+           ("Ralf Borges", "M", "Jabaquara", 1600.00, "Marketing");
+         
+select * from funcionario;
+
+#1
+select sum(sal_func) as soma_salarios from funcionario;
+
+#2
+select count(*) as quantidade_marketing from funcionario where setor_func = 'Marketing';
+
+#3
+select setor_func, avg(sal_func) as media_salarios 
+from funcionario 
+group by setor_func 
+order by media_salarios desc;
+
+#4
+select count(*) as funcionarios_socorro 
+from funcionario 
+where sal_func < 3000.00 and bairro_func = 'Socorro';
+
+#5
+select setor_func, count(*) AS quantidade_funcionarios 
+from funcionario 
+group by setor_func 
+having count(*) > 3;
