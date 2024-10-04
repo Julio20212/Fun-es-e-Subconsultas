@@ -1,0 +1,73 @@
+create database banco_vendas;
+
+create table vendas (
+	id_vendas int auto_increment primary key not null,
+    produto varchar(100) not null,
+    quantidade int not null,
+    preco decimal(10,2)
+);
+
+insert into vendas (produto, quantidade, preco)
+values  ("Ferrari", 10, 1000000.00),
+        ("Lamborghini", 10, 1500000.00),
+        ("Porsche", 10, 1200000.00),
+        ("Maserati", 10, 1300000.00),
+        ("McLaren", 10, 1800000.00),
+        ("Aston Martin", 10, 1400000.00),
+        ("Bugatti", 10, 2000000.00),
+        ("Tesla", 10, 900000.00),
+        ("Bentley", 10, 1600000.00),
+        ("Rolls-Royce", 10, 2200000.00);
+	
+select * from vendas;    
+
+select count(*) as total_vendas
+from vendas;
+
+select sum(quantidade) as total_produtos
+from vendas;
+
+select avg(preco) as media_preço
+from vendas;
+
+select min(preco) as menor_preço
+from vendas;
+
+select max(preco) as maior_preço
+from vendas;
+
+
+insert into vendas (produto, quantidade, preco)
+values  ("Ferrari", 5, 1000000.00),
+        ("Lamborghini", 5, 1500000.00),
+        ("Porsche", 5, 1200000.00),
+        ("Maserati", 5, 1300000.00),
+        ("McLaren", 5, 1800000.00),
+        ("Aston Martin", 5, 1400000.00),
+        ("Bugatti", 5, 2000000.00),
+        ("Tesla", 5, 900000.00),
+        ("Bentley", 5, 1600000.00),
+        ("Rolls-Royce", 5, 2200000.00);
+        
+select produto, count(*) as total_vendas
+from vendas
+group by produto;
+
+select produto, sum(quantidade) as total_produtos_vendas
+from vendas
+group by produto
+having total_produtos_vendas > 12;
+
+select produto, quantidade, preco
+from vendas
+order by preco asc;
+
+select produto, quantidade, preco
+from vendas
+order by produto asc;
+
+select * from vendas;
+
+select produto, preco,
+	(select min(preco) from vendas) as maior_preço
+    from vendas;
